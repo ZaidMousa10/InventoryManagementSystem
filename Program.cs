@@ -48,9 +48,12 @@ class Program
                         continue;
                     }
 
-                    inventory.AddProduct(new Product(name, price, qty));
+                    inventory.addProduct(new Product(name, price, qty));
                     break;
+
                 case "2":
+                    Console.WriteLine("Displaying all products...");
+                    inventory.viewProducts();
                     break;
                 case "3":
                     break;

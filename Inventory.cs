@@ -10,10 +10,23 @@ namespace InventoryManagementSystem
     {
         private List<Product> products = new List<Product>();
 
-        public void AddProduct(Product product)
+        public void addProduct(Product product)
         {
             products.Add(product);
             Console.WriteLine("Product added successfully.");
+        }
+        public void viewProducts()
+        {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("No products available.");
+                return;
+            }
+            Console.WriteLine("Current products in inventory:");
+            foreach (var product in products)
+            {
+                Console.WriteLine(product);
+            }
         }
     }
 }
