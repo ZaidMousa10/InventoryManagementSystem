@@ -48,15 +48,20 @@ class Program
                         continue;
                     }
 
-                    inventory.addProduct(new Product(name, price, qty));
+                    inventory.AddProduct(new Product(name, price, qty));
                     break;
 
                 case "2":
                     Console.WriteLine("Displaying all products...");
-                    inventory.viewProducts();
+                    inventory.ViewProducts();
                     break;
+
                 case "3":
+                    Console.Write("Enter name of product to edit: ");
+                    string editName = Console.ReadLine();
+                    inventory.EditProduct(editName);
                     break;
+
                 case "4":
                     break;
                 case "5":

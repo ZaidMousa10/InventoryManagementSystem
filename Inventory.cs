@@ -10,12 +10,12 @@ namespace InventoryManagementSystem
     {
         private List<Product> products = new List<Product>();
 
-        public void addProduct(Product product)
+        public void AddProduct(Product product)
         {
             products.Add(product);
             Console.WriteLine("Product added successfully.");
         }
-        public void viewProducts()
+        public void ViewProducts()
         {
             if (products.Count == 0)
             {
@@ -28,5 +28,35 @@ namespace InventoryManagementSystem
                 Console.WriteLine(product);
             }
         }
+        public bool EditProduct(string name)
+        {
+            var product = products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (product != null)
+            {
+                Console.WriteLine($"Editing product: {product}");
+
+                Console.Write("Enter new name (leave blank to keep current): ");
+                string newName = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(newName))
+                    product.Name = newName;
+
+                Console.Write("Enter new price (leave blank to keep current): ");
+                string priceInput = Console.ReadLine();
+                if (decimal.TryParse(priceInput, out decimal newPrice))
+                    product.Price = newPrice;
+
+                Console.Write("Enter new quantity (leave blank to keep current): ");
+                string qtyInput = Console.ReadLine();
+                if (int.TryParse(qtyInput, out int newQty))
+                    product.Quantity = newQty;
+
+                Console.WriteLine("Product edited successfully.");
+                return true;
+            }
+
+            Console.WriteLine("Product not found.");
+            return false;
+        }
+
     }
 }
