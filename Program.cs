@@ -109,6 +109,8 @@ class Program
                     break;
 
                 case "6":
+                    Console.WriteLine("Exiting the Inventory Management System. Goodbye!");
+                    running = false;
                     break;
 
                 default:

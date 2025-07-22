@@ -27,7 +27,7 @@ namespace InventoryManagementSystem
                 Console.WriteLine("No products available.");
                 return;
             }
-            Console.WriteLine("Current products in inventory:");
+            Console.WriteLine("Current products in inventory: \n");
             foreach (var product in products)
             {
                 Console.WriteLine(product);
