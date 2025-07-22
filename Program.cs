@@ -25,31 +25,65 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.Write("Enter product name: ");
-                    string name = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(name))
+                    string name;
+                    decimal price;
+                    int qty;
+
+                    // Get valid name
+                    while (true)
                     {
-                        Console.WriteLine("Product name cannot be empty. Please try again.");
-                        continue;
+                        Console.Write("Enter product name: ");
+                        name = Console.ReadLine();
+
+                        if (string.IsNullOrWhiteSpace(name))
+                        {
+                            Console.WriteLine("Product name cannot be empty. Please try again.");
+                            continue;
+                        }
+
+                        if (inventory.Products.Any(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            Console.WriteLine("Product with this name already exists. Please use a different name.");
+                            continue;
+                        }
+
+                        break;
                     }
 
-                    Console.Write("Enter product price: ");
-                    decimal price = decimal.Parse(Console.ReadLine());
-                    if (price < 0)
+                    // Get valid price
+                    while (true)
                     {
-                        Console.WriteLine("Price cannot be negative. Please try again.");
-                        continue;
+                        Console.Write("Enter product price: ");
+                        string priceInput = Console.ReadLine();
+
+                        if (!decimal.TryParse(priceInput, out price) || price < 0)
+                        {
+                            Console.WriteLine("Invalid price. Please enter a non-negative number.");
+                            continue;
+                        }
+
+                        break;
                     }
-                    Console.Write("Enter product quantity: ");
-                    int qty = int.Parse(Console.ReadLine());
-                    if (qty < 0)
+
+                    // Get valid quantity
+                    while (true)
                     {
-                        Console.WriteLine("Quantity cannot be negative. Please try again.");
-                        continue;
+                        Console.Write("Enter product quantity: ");
+                        string qtyInput = Console.ReadLine();
+
+                        // Accept only Integer numbers
+                        if (!int.TryParse(qtyInput, out qty) || qty < 0)
+                        {
+                            Console.WriteLine("Invalid quantity. Please enter a non-negative Integer number.");
+                            continue;
+                        }
+
+                        break;
                     }
 
                     inventory.AddProduct(new Product(name, price, qty));
                     break;
+
 
                 case "2":
                     Console.WriteLine("Displaying all products...");
@@ -66,12 +100,17 @@ class Program
                     Console.Write("Enter name of product to Delete: ");
                     string deleteName = Console.ReadLine();
                     inventory.DeleteProduct(deleteName);
+                    break;
 
-                    break;
                 case "5":
+                    Console.Write("Enter name of product to search: ");
+                    string searchName = Console.ReadLine();
+                    inventory.SearchProduct(searchName);
                     break;
+
                 case "6":
                     break;
+
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     break;

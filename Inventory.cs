@@ -9,6 +9,11 @@ namespace InventoryManagementSystem
     internal class Inventory
     {
         private List<Product> products = new List<Product>();
+        public List<Product> Products
+        {
+            get { return products; }
+            private set { products = value; }
+        }
 
         public void AddProduct(Product product)
         {
@@ -68,6 +73,18 @@ namespace InventoryManagementSystem
             }
             Console.WriteLine("Product not found.");
             return false;
+        }
+        public void SearchProduct(string name)
+        {
+            var product = products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (product != null)
+            {
+                Console.WriteLine($"Product found: {product}");
+            }
+            else
+            {
+                Console.WriteLine("Product not found.");
+            }
         }
 
     }
